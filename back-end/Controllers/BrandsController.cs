@@ -1,9 +1,10 @@
-﻿using back_end.Entities;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using back_end.DTOs;
+using back_end.Entities;
+using back_end.Utilidades;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,22 +17,33 @@ namespace back_end.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<BrandsController> _logger;
-        public BrandsController(ApplicationDbContext context, ILogger<BrandsController> logger)
+        private readonly IMapper _mapper;
+
+        public BrandsController(ApplicationDbContext context, ILogger<BrandsController> logger, IMapper mapper)
         {
             _context = context;
             _logger = logger;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Brand>>> Get()
+        public async Task<ActionResult<List<BrandDTO>>> Get([FromQuery] PaginacionDTO paginacionDto)
         {
-            return await _context.Brands.ToListAsync();
+            var queryable = _context.Brands.AsQueryable();
+            await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
+
+            var brands = queryable
+                .OrderBy(x => x.Name)
+                .Paginar(paginacionDto)
+                .ToList();
+
+            return _mapper.Map<List<BrandDTO>>(brands);
         }
 
         [HttpGet("{Id:int}")]
         public async Task<ActionResult<Brand>> Get(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Brands.FirstOrDefaultAsync(x=> x.Id == id);
         }
 
         [HttpPost]
@@ -42,16 +54,31 @@ namespace back_end.Controllers
             return NoContent();
         }
 
-        [HttpPut]
-        public ActionResult Put([FromBody] Brand brand)
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(int id, [FromBody] BrandDTO brandDto)
         {
-            throw new NotImplementedException();
+            var brand = await _context.Brands.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (brand == null) return NotFound();
+
+            brand = _mapper.Map(brandDto, brand);
+
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
-        [HttpDelete]
-        public ActionResult Delete()
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            throw new NotImplementedException();
+            var brand = await _context.Brands.AnyAsync(x => x.Id == id);
+
+            if (!brand) return NotFound();
+
+            _context.Remove(new Brand() { Id = id });
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
 
     }

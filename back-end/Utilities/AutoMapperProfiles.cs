@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using back_end.DTOs;
+using back_end.Entities;
 
 namespace back_end.Utilities
 {
     public class AutoMapperProfiles : Profile
     {
+        public AutoMapperProfiles()
+        {
+            CreateMap<Brand, BrandDTO>().ReverseMap();
+        }
     }
 }
