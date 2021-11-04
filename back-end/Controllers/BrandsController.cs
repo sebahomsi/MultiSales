@@ -41,14 +41,16 @@ namespace back_end.Controllers
         }
 
         [HttpGet("{Id:int}")]
-        public async Task<ActionResult<Brand>> Get(int id)
+        public async Task<ActionResult<BrandDTO>> Get(int id)
         {
-            return await _context.Brands.FirstOrDefaultAsync(x=> x.Id == id);
+            var brand = await _context.Brands.FirstOrDefaultAsync(x => x.Id == id);
+            return _mapper.Map<BrandDTO>(brand);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] Brand brand)
+        public async Task<ActionResult> Post([FromBody] BrandDTO brandDto)
         {
+            var brand = _mapper.Map<Store>(brandDto);
             _context.Add(brand);
             await _context.SaveChangesAsync();
             return NoContent();
