@@ -20,7 +20,5 @@ namespace back_end.Entities
         public int StreetNumber { get; set; }
         public bool IsApartment { get; set; }
         public string Floor { get; set; }
-        public int PersonId { get; set; }
-        public Person Person { get; set; }
     }
 }

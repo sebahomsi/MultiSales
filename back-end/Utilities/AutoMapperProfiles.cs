@@ -9,6 +9,7 @@ namespace back_end.Utilities
         public AutoMapperProfiles()
         {
             CreateMap<Brand, BrandDTO>().ReverseMap();
+            CreateMap<Store, StoreDTO>().ReverseMap();
         }
     }
 }
