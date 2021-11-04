@@ -10,6 +10,7 @@ namespace back_end.Utilities
         {
             CreateMap<Brand, BrandDTO>().ReverseMap();
             CreateMap<Store, StoreDTO>().ReverseMap();
+            CreateMap<Customer, CustomerDTO>().ReverseMap();
         }
     }
 }

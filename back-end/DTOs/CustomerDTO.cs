@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace back_end.DTOs
 {
@@ -11,5 +12,7 @@ namespace back_end.DTOs
         public string Email { get; set; }
         public int DNI { get; set; }
         public DateTime BirthDate { get; set; }
+        public List<AddressDTO> Addresses { get; set; }
+        public List<SaleDTO> Sales { get; set; }
     }
 }

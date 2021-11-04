@@ -16,9 +16,9 @@ namespace back_end.Controllers
     public class StoresController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly ILogger<BrandsController> _logger;
+        private readonly ILogger<StoresController> _logger;
         private readonly IMapper _mapper;
-        public StoresController(ApplicationDbContext context, ILogger<BrandsController> logger, IMapper mapper)
+        public StoresController(ApplicationDbContext context, ILogger<StoresController> logger, IMapper mapper)
         {
             _context = context;
             _logger = logger;

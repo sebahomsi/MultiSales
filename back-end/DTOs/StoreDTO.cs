@@ -1,4 +1,6 @@
-﻿namespace back_end.DTOs
+﻿using System.Collections.Generic;
+
+namespace back_end.DTOs
 {
     public class StoreDTO
     {
@@ -10,5 +12,7 @@
         public string State { get; set; }
         public string Town { get; set; }
         public int PostalCode { get; set; }
+        public List<SaleDTO> Sales { get; set; }
+
     }
 }
