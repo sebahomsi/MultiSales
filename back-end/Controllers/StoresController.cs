@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using back_end.DTOs;
+using back_end.Entities;
 using back_end.Utilidades;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +37,49 @@ namespace back_end.Controllers
                 .ToList();
 
             return _mapper.Map<List<StoreDTO>>(stores);
+        }
+
+        [HttpGet("{Id:int}")]
+        public async Task<ActionResult<StoreDTO>> Get(int id)
+        {
+            var store = await _context.Stores.FirstOrDefaultAsync(x => x.Id == id);
+            return _mapper.Map<StoreDTO>(store);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] StoreDTO storeDto)
+        {
+            var store = _mapper.Map<Store>(storeDto);
+            _context.Add(store);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(int id, [FromBody] StoreDTO storeDto)
+        {
+            var store = await _context.Stores.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (store == null) return NotFound();
+
+            store = _mapper.Map(storeDto, store);
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var store = await _context.Stores.AnyAsync(x => x.Id == id);
+
+            if (!store) return NotFound();
+
+            _context.Remove(new Store() { Id = id });
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }
