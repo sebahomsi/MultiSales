@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = back_end
-build_property.ProjectDir = C:\Users\sebah\source\repos\MultiSales\back-end\
+build_property.ProjectDir = C:\Proyecto-Final\backend\MultiSales\back-end\

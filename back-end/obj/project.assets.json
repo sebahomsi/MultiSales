@@ -6161,25 +6161,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sebah\\.nuget\\packages\\": {},
+    "C:\\Users\\alazarte\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sebah\\source\\repos\\MultiSales\\back-end\\back-end.csproj",
+      "projectUniqueName": "C:\\Proyecto-Final\\backend\\MultiSales\\back-end\\back-end.csproj",
       "projectName": "back-end",
-      "projectPath": "C:\\Users\\sebah\\source\\repos\\MultiSales\\back-end\\back-end.csproj",
-      "packagesPath": "C:\\Users\\sebah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sebah\\source\\repos\\MultiSales\\back-end\\obj\\",
+      "projectPath": "C:\\Proyecto-Final\\backend\\MultiSales\\back-end\\back-end.csproj",
+      "packagesPath": "C:\\Users\\alazarte\\.nuget\\packages\\",
+      "outputPath": "C:\\Proyecto-Final\\backend\\MultiSales\\back-end\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\sebah\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\alazarte\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
