@@ -77,7 +77,7 @@ namespace back_end.Controllers
 
             if (!brand) return NotFound();
 
-            _context.Remove(new Brand() { Id = id });
+            _context.Remove(new Brand { Id = id });
 
             await _context.SaveChangesAsync();
 
