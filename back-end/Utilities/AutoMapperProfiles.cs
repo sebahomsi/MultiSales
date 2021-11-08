@@ -13,6 +13,8 @@ namespace back_end.Utilities
             CreateMap<Customer, CustomerDTO>().ReverseMap();
             CreateMap<Employee, EmployeeDTO>().ReverseMap();
             CreateMap<Product, ProductDTO>().ReverseMap();
+            CreateMap<Sale, SaleDTO>().ReverseMap();
+            CreateMap<SaleDetail, SaleDetailDTO>().ReverseMap();
         }
     }
 }
