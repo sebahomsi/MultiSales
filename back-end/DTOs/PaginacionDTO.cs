@@ -1,24 +1,20 @@
-﻿namespace back_end.DTOs
+﻿using System.Collections.Generic;
+
+namespace back_end.DTOs
 {
-    public class PaginacionDTO
+    public class PaginacionDto
     {
         public int Pagina { get; set; } = 1;
 
-        private int registrosPorPagina = 10;
-        private readonly int cantidadMaximaRegistrosPorPagina = 50;
+        private int _registrosPorPagina = 10;
+        private const int CantidadMaximaRegistrosPorPagina = 50;
 
         public int RegistrosPorPagina
         {
-            get
-            {
-                return registrosPorPagina;
-            }
-            set
-            {
-                registrosPorPagina = (value > cantidadMaximaRegistrosPorPagina)
-                    ? cantidadMaximaRegistrosPorPagina
+            get => _registrosPorPagina;
+            set => _registrosPorPagina = (value > CantidadMaximaRegistrosPorPagina)
+                    ? CantidadMaximaRegistrosPorPagina
                     : value;
-            }
         }
     }
 }

@@ -6,7 +6,7 @@ namespace back_end.Utilities
     public static class QueryableExtensions
     {
         public static IQueryable<T> Paginar<T>(this IQueryable<T> queryable,
-            PaginacionDTO paginacionDto)
+            PaginacionDto paginacionDto)
         {
             return queryable
                 .Skip((paginacionDto.Pagina - 1) * paginacionDto.RegistrosPorPagina)

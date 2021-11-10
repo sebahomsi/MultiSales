@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using back_end.DTOs;
 using back_end.Entities;
-using back_end.Utilidades;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -28,7 +27,7 @@ namespace back_end.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<BrandDTO>>> Get([FromQuery] PaginacionDTO paginacionDto)
+        public async Task<ActionResult<List<BrandDTO>>> Get([FromQuery] PaginacionDto paginacionDto)
         {
             var queryable = _context.Brands.AsQueryable();
             await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
@@ -51,20 +50,22 @@ namespace back_end.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] BrandDTO brandDto)
         {
-            var brand = _mapper.Map<Store>(brandDto);
+            var brand = _mapper.Map<Brand>(brandDto);
             _context.Add(brand);
             await _context.SaveChangesAsync();
-            return NoContent();
+            return Ok();
         }
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult> Put(int id, [FromBody] BrandDTO brandDto)
         {
             var brand = await _context.Brands.FirstOrDefaultAsync(x => x.Id == id);
+            if (brand == null)
+            {
+                return NotFound();
+            }
 
-            if (brand == null) return NotFound();
-
-            brand = _mapper.Map(brandDto, brand);
+            _ = _mapper.Map(brandDto, brand);
 
             await _context.SaveChangesAsync();
             return NoContent();
@@ -73,15 +74,15 @@ namespace back_end.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var brand = await _context.Brands.AnyAsync(x => x.Id == id);
-
-            if (!brand) return NotFound();
+            var brand = await _context.Brands.FirstOrDefaultAsync(x => x.Id == id);
+            if (brand == null)
+            {
+                return NotFound();
+            }
 
             _context.Remove(new Brand { Id = id });
-
             await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok();
         }
 
     }

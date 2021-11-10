@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using back_end.DTOs;
 using back_end.Entities;
-using back_end.Utilidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +29,7 @@ namespace back_end.Controllers
 
         }
         [HttpGet]
-        public async Task<ActionResult<List<ProductDTO>>> Get([FromQuery] PaginacionDTO paginacionDto)
+        public async Task<ActionResult<List<ProductDTO>>> Get([FromQuery] PaginacionDto paginacionDto)
         {
             var queryable = _context.Products.AsQueryable();
             await HttpContext.InsertarParametrosPaginacionEnCabecera(queryable);
